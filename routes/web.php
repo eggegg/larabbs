@@ -35,3 +35,6 @@ $this->get('email/verify', 'Auth\VerificationController@show')->name('verificati
 $this->get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 $this->get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
+
+Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
+
