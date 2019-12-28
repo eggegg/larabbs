@@ -12,6 +12,10 @@ use Intervention\Image\Image;
 class UsersController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'show']);
+    }
 
     public function show(User $user)
     {
@@ -21,11 +25,13 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
         return view('users.edit', compact('user'));
     }
 
     public function update(UserRequest $request, ImageUploadHandler $uploader, User $user)
     {
+        $this->authorize('update', $user);
         $data = $request->all();
 
         if ($request->avatar) {
